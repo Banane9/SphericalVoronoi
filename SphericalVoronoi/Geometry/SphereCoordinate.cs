@@ -1,9 +1,8 @@
-﻿using SphericalVoronoi.CoordinateSystems.Cartesian;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SphericalVoronoi.CoordinateSystems.Spherical
+namespace SphericalVoronoi.Geometry
 {
     /// <summary>
     /// Represents a point on a Sphere centered at the Cartesian Point (0/0/0).
@@ -25,7 +24,7 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
         /// Creates a new instance of the <see cref="SphereCoordinate"/> struct with the given positions.
         /// </summary>
         /// <param name="θ">The polar angle (rotation away from pointing straight up). Will be made to fit into [0, Pi].</param>
-        /// <param name="ϕ">The azimuthal angle (rotation away from pointing straight to the front). Will be made to fit with any changes to the polar angle and to fit into [0, 2Pi].</param>
+        /// <param name="ϕ">The azimuthal angle (rotation away from pointing straight to the front). Will be made to fit with any changes to the polar angle and to fit into [-Pi, Pi].</param>
         public SphereCoordinate(double θ, double ϕ)
         {
             this.θ = θ;

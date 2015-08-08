@@ -1,9 +1,8 @@
-﻿using SphericalVoronoi.CoordinateSystems.Cartesian;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SphericalVoronoi.CoordinateSystems.Spherical
+namespace SphericalVoronoi.Geometry
 {
     /// <summary>
     /// Represents a great circle on the unit sphere.

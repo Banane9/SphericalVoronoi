@@ -1,4 +1,5 @@
-﻿using SphericalVoronoi.CoordinateSystems.Spherical;
+﻿using SphericalVoronoi.Geometry;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

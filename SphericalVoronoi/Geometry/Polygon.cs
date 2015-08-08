@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SphericalVoronoi.CoordinateSystems.Spherical
+namespace SphericalVoronoi.Geometry
 {
     public class Polygon
     {

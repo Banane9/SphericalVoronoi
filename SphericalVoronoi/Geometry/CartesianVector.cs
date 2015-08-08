@@ -1,9 +1,8 @@
-﻿using SphericalVoronoi.CoordinateSystems.Spherical;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SphericalVoronoi.CoordinateSystems.Cartesian
+namespace SphericalVoronoi.Geometry
 {
     /// <summary>
     /// Represents a point in Cartesian Space.
