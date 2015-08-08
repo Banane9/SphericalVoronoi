@@ -7,14 +7,10 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
 {
     /// <summary>
     /// Represents a point on a Sphere centered at the Cartesian Point (0/0/0).
+    /// Radius is 1.
     /// </summary>
     public struct SphereCoordinate
     {
-        /// <summary>
-        /// The radius of the Sphere (Euclidian Distance in Carteesian Space).
-        /// </summary>
-        public readonly double Radius;
-
         /// <summary>
         /// The polar angle (rotation away from pointing straight up).
         /// </summary>
@@ -28,12 +24,10 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
         /// <summary>
         /// Creates a new instance of the <see cref="SphereCoordinate"/> struct with the given positions.
         /// </summary>
-        /// <param name="r">The radius of the Sphere (Euclidian Distance in Cartesian Space). Will be made positive.</param>
         /// <param name="θ">The polar angle (rotation away from pointing straight up). Will be made to fit into [0, Pi].</param>
         /// <param name="ϕ">The azimuthal angle (rotation away from pointing straight to the front). Will be made to fit with any changes to the polar angle and to fit into [0, 2Pi].</param>
-        public SphereCoordinate(double r, double θ, double ϕ)
+        public SphereCoordinate(double θ, double ϕ)
         {
-            Radius = Math.Abs(r);
             this.θ = θ;
             this.ϕ = ϕ;
 
@@ -49,7 +43,7 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
             var θ = Math.Acos(cartesianCoordinates.Y / r);
             var ϕ = Math.Atan2(cartesianCoordinates.X, cartesianCoordinates.Z);
 
-            return new SphereCoordinate(r, θ, ϕ);
+            return new SphereCoordinate(θ, ϕ);
         }
 
         public static bool operator !=(SphereCoordinate left, SphereCoordinate right)
@@ -79,7 +73,7 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
 
         public override string ToString()
         {
-            return "Spherical: " + Radius + "/" + θ + "/" + ϕ;
+            return "Spherical: " + θ + "/" + ϕ;
         }
     }
 }

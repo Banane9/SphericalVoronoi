@@ -37,7 +37,7 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
                 var θ = Math.Min(Start.θ, End.θ) + (Math.Abs(Start.θ - End.θ) / 2);
                 var ϕ = Math.Min(Start.ϕ, End.ϕ) + (Math.Abs(Start.ϕ - End.ϕ) / 2);
 
-                var midpoint = (CartesianVector)new SphereCoordinate(Start.Radius, θ, ϕ);
+                var midpoint = (CartesianVector)new SphereCoordinate(θ, ϕ);
                 if (IsOnArc(midpoint))
                     return midpoint;
 
@@ -69,12 +69,9 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
         {
             // http://www.had2know.com/academics/great-circle-distance-sphere-2-points.html
 
-            if (!start.Radius.IsAlmostEqualTo(end.Radius))
-                throw new ArgumentOutOfRangeException(start.Radius > end.Radius ? "start" : "end", "Radius is larger than that of the other Sphere Coordinate.");
-
             var cartesianLength = ((CartesianVector)start - end).Length;
 
-            return 2 * start.Radius * Math.Asin(cartesianLength / (2 * start.Radius));
+            return 2 * Math.Asin(cartesianLength / 2);
         }
 
         /// <summary>
@@ -88,9 +85,6 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
         {
             // http://www.boeing-727.com/Data/fly%20odds/distance.html
 
-            if (!Start.Radius.IsAlmostEqualTo(other.Start.Radius))
-                throw new ArgumentOutOfRangeException(Start.Radius > other.Start.Radius ? "this" : "other", "Radius is larger than that of the other Sphere Coordinates.");
-
             intersection = default(SphereCoordinate);
 
             if (Length.IsAlmostEqualTo(0) || other.Length.IsAlmostEqualTo(0))
@@ -100,7 +94,6 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
             if (!BaseCircle.Intersects(other.BaseCircle, out possibleIntersection1))
                 return false;
 
-            possibleIntersection1 *= Start.Radius;
             var possibleIntersection2 = -possibleIntersection1;
 
             if (IsOnArc(possibleIntersection1) && other.IsOnArc(possibleIntersection1))

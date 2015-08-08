@@ -10,21 +10,21 @@ namespace SphericalVoronoi.Testing
         [TestMethod]
         public void HandlesGreaterTheta()
         {
-            var sphereCoord1 = new SphereCoordinate(1, 3 * Math.PI, 0);
-            var sphereCoord2 = new SphereCoordinate(1, 4 * Math.PI, 0);
+            var sphereCoord1 = new SphereCoordinate(3 * Math.PI, 0);
+            var sphereCoord2 = new SphereCoordinate(4 * Math.PI, 0);
 
-            Assert.AreEqual(new SphereCoordinate(1, Math.PI, 0), sphereCoord1);
-            Assert.AreEqual(new SphereCoordinate(1, 0, Math.PI), sphereCoord2);
+            Assert.AreEqual(new SphereCoordinate(Math.PI, 0), sphereCoord1);
+            Assert.AreEqual(new SphereCoordinate(0, Math.PI), sphereCoord2);
         }
 
         [TestMethod]
         public void HandlesSmallerTheta()
         {
-            var sphereCoord1 = new SphereCoordinate(1, -Math.PI, 0);
-            var sphereCoord2 = new SphereCoordinate(1, -2 * Math.PI, 0);
+            var sphereCoord1 = new SphereCoordinate(-Math.PI, 0);
+            var sphereCoord2 = new SphereCoordinate(-2 * Math.PI, 0);
 
-            Assert.AreEqual(new SphereCoordinate(1, Math.PI, 0), sphereCoord1);
-            Assert.AreEqual(new SphereCoordinate(1, 0, Math.PI), sphereCoord2);
+            Assert.AreEqual(new SphereCoordinate(Math.PI, 0), sphereCoord1);
+            Assert.AreEqual(new SphereCoordinate(0, Math.PI), sphereCoord2);
         }
     }
 }

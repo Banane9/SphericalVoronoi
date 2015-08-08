@@ -15,9 +15,9 @@ namespace SphericalVoronoi.CoordinateSystems.Spherical
             {
                 // http://mathworld.wolfram.com/SphericalPolygon.html
 
-                var interiorAngleSum = corners.Keys.Select(corner => GetCornerAngle(corner));
+                var interiorAngleSum = corners.Keys.Select(corner => GetCornerAngle(corner)).Sum();
 
-                return (interiorAngleSum.Sum() - ((corners.Keys.Count - 2) * Math.PI)) * Math.Pow(corners.Keys.First().Radius, 2);
+                return (interiorAngleSum - ((corners.Keys.Count - 2) * Math.PI));
             }
         }
 
