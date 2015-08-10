@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SphericalVoronoi.Geometry
 {
-    public class Polygon
+    public class SpherePolygon
     {
         private readonly Dictionary<SphereCoordinate, Tuple<GreatCircleSegment, GreatCircleSegment>> corners = new Dictionary<SphereCoordinate, Tuple<GreatCircleSegment, GreatCircleSegment>>();
         private readonly List<GreatCircleSegment> sides = new List<GreatCircleSegment>();
@@ -21,7 +21,7 @@ namespace SphericalVoronoi.Geometry
             }
         }
 
-        public Polygon(params SphereCoordinate[] points)
+        public SpherePolygon(params SphereCoordinate[] points)
         {
             if (points.Length < 2)
                 throw new ArgumentOutOfRangeException("points", "There has to be at least two points to make a polygon on a sphere.");

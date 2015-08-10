@@ -37,7 +37,7 @@ namespace SphericalVoronoi.ConsoleTesting
             Console.WriteLine(arc1.Intersects(arc2, out intersection) + "   " + intersection + "   " + (CartesianVector)intersection);
 
             Console.WriteLine();
-            var quarterSpherePoly = new Polygon(new SphereCoordinate(0, 0), new SphereCoordinate(0.5 * Math.PI, 0), new SphereCoordinate(0.5 * Math.PI, 0.5 * Math.PI), new SphereCoordinate(0.5 * Math.PI, Math.PI));
+            var quarterSpherePoly = new SpherePolygon(new SphereCoordinate(0, 0), new SphereCoordinate(0.5 * Math.PI, 0), new SphereCoordinate(0.5 * Math.PI, 0.5 * Math.PI), new SphereCoordinate(0.5 * Math.PI, Math.PI));
             Console.WriteLine("Area of quarter sphere Polygon: " + quarterSpherePoly.Area);
             Console.WriteLine("Area of whole sphere: " + 4 * Math.PI);
             Console.WriteLine("Area of quarter sphere: " + Math.PI);
