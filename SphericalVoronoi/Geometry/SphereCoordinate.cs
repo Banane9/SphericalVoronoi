@@ -52,7 +52,7 @@ namespace SphericalVoronoi.Geometry
 
         public static bool operator ==(SphereCoordinate left, SphereCoordinate right)
         {
-            return (CartesianVector)left == (CartesianVector)right;
+            return left.θ.IsAlmostEqualTo(right.θ) && left.ϕ.IsAlmostEqualTo(right.ϕ);
         }
 
         public override bool Equals(object obj)
@@ -67,7 +67,10 @@ namespace SphericalVoronoi.Geometry
 
         public override int GetHashCode()
         {
-            return ((CartesianVector)this).GetHashCode();
+            unchecked
+            {
+                return θ.GetHashCode() * 13 + ϕ.GetHashCode();
+            }
         }
 
         public override string ToString()

@@ -20,7 +20,7 @@ namespace SphericalVoronoi.Geometry
         /// <param name="start">The start coordinate of the segment.</param>
         /// <param name="end">The end coordinate of the segment.</param>
         public GreatCircle(CartesianVector start, CartesianVector end)
-            : this(start.CrossProduct(end).AsUnitVector)
+            : this(start.CrossProduct(end))
         {
         }
 
