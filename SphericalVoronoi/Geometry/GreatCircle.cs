@@ -65,7 +65,7 @@ namespace SphericalVoronoi.Geometry
         }
 
         /// <summary>
-        /// Returns one possible tangent vector of this <see cref="GreatCircle"/> in that point, the other is antipodal to it.
+        /// Returns one possible tangent vector of this <see cref="GreatCircle"/> in the given point, the other is antipodal to it.
         /// </summary>
         /// <param name="point">The point on the <see cref="GreatCircle"/> that the tangent is wanted for.</param>
         /// <returns>One possible tangent vector.</returns>
@@ -75,10 +75,10 @@ namespace SphericalVoronoi.Geometry
         }
 
         /// <summary>
-        /// Returns the tangent vector that points in the specified direction.
+        /// Returns the tangent vector of this <see cref="GreatCircle"/> in the given point, that points in the specified direction.
         /// </summary>
         /// <param name="point">The point on the <see cref="GreatCircle"/> that the tangent is wanted for.</param>
-        /// <param name="direction">The point specifying in which direction the tangent vector will point.</param>
+        /// <param name="direction">The vector specifying in which direction the tangent vector will point.</param>
         /// <returns>The tangent vector pointing in the right direction.</returns>
         public CartesianVector GetTangentAt(CartesianVector point, CartesianVector direction)
         {

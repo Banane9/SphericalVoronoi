@@ -6,8 +6,7 @@ namespace SphericalVoronoi.Geometry
 {
     public class SpherePolygon
     {
-        private readonly Dictionary<SphereCoordinate, Tuple<GreatCircleSegment, GreatCircleSegment>> corners = new Dictionary<SphereCoordinate, Tuple<GreatCircleSegment, GreatCircleSegment>>();
-        private readonly List<GreatCircleSegment> sides = new List<GreatCircleSegment>();
+        private Corner startCorner;
 
         public double Area
         {
@@ -15,9 +14,27 @@ namespace SphericalVoronoi.Geometry
             {
                 // http://mathworld.wolfram.com/SphericalPolygon.html
 
-                var interiorAngleSum = corners.Keys.Select(corner => GetCornerAngle(corner)).Sum();
+                var corners = Corners.ToArray();
+                var interiorAngleSum = corners.Select(corner => corner.Angle).Sum();
 
-                return (interiorAngleSum - ((corners.Keys.Count - 2) * Math.PI));
+                return (interiorAngleSum - ((corners.Length - 2) * Math.PI));
+            }
+        }
+
+        public IEnumerable<Corner> Corners
+        {
+            get
+            {
+                var currentCorner = startCorner;
+
+                do
+                {
+                    yield return currentCorner;
+                    currentCorner = currentCorner.Next;
+                }
+                while (currentCorner.Next != startCorner);
+
+                yield return currentCorner;
             }
         }
 
@@ -26,26 +43,54 @@ namespace SphericalVoronoi.Geometry
             if (points.Length < 2)
                 throw new ArgumentOutOfRangeException("points", "There has to be at least two points to make a polygon on a sphere.");
 
-            if (points.Length > 2)
-                for (var i = 0; i < points.Length - 1; ++i)
-                    sides.Add(new GreatCircleSegment(points[i], points[i + 1]));
+            startCorner = new Corner(points[0]);
+            var currentCorner = startCorner;
+            for (var i = 1; i % points.Length != 0; ++i)
+            {
+                var nextCorner = new Corner(points[i]);
+                currentCorner.Next = nextCorner;
+                nextCorner.Previous = currentCorner;
 
-            sides.Add(new GreatCircleSegment(points[points.Length - 1], points[0]));
+                currentCorner = nextCorner;
+            }
 
-            corners.Add(sides[0].Start, new Tuple<GreatCircleSegment, GreatCircleSegment>(sides[0], sides[sides.Count - 1]));
-
-            for (var i = 1; i < sides.Count; ++i)
-                corners.Add(sides[i].Start, new Tuple<GreatCircleSegment, GreatCircleSegment>(sides[i], sides[i - 1]));
+            currentCorner.Next = startCorner;
+            startCorner.Previous = currentCorner;
         }
 
-        private double GetCornerAngle(SphereCoordinate corner)
+        public class Corner
         {
-            var segments = corners[corner];
+            public double Angle
+            {
+                get
+                {
+                    var tangentToPrevious = ToPrevious.GetTangentAt(Point, Previous.Point);
+                    var tangentToNext = ToNext.GetTangentAt(Point, Next.Point);
 
-            var tangentVector1 = segments.Item1.BaseCircle.GetTangentAt(corner, corner != segments.Item1.Start ? segments.Item1.Start : segments.Item1.End);
-            var tangentVector2 = segments.Item2.BaseCircle.GetTangentAt(corner, corner != segments.Item2.Start ? segments.Item2.Start : segments.Item2.End);
+                    return Math.Abs(Math.Acos(tangentToPrevious.DotProduct(tangentToNext)));
+                }
+            }
 
-            return Math.Abs(Math.Acos(tangentVector1.DotProduct(tangentVector2)));
+            public Corner Next { get; set; }
+
+            public SphereCoordinate Point { get; private set; }
+
+            public Corner Previous { get; set; }
+
+            public GreatCircleSegment ToNext
+            {
+                get { return new GreatCircleSegment(Point, Next.Point); }
+            }
+
+            public GreatCircleSegment ToPrevious
+            {
+                get { return new GreatCircleSegment(Point, Previous.Point); }
+            }
+
+            public Corner(SphereCoordinate point)
+            {
+                Point = point;
+            }
         }
     }
 }

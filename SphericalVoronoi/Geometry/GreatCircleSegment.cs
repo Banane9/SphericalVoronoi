@@ -74,6 +74,27 @@ namespace SphericalVoronoi.Geometry
         }
 
         /// <summary>
+        /// Returns one possible tangent vector of this <see cref="GreatCircleSegement"/>'s underlaying <see cref="GreatCircle"/> in the given point, the other is antipodal to it.
+        /// </summary>
+        /// <param name="point">The point on the underlaying <see cref="GreatCircle"/> that the tangent is wanted for.</param>
+        /// <returns>One possible tangent vector.</returns>
+        public CartesianVector GetTangentAt(SphereCoordinate point)
+        {
+            return BaseCircle.GetTangentAt(point);
+        }
+
+        /// <summary>
+        /// Returns the tangent vector of this <see cref="GreatCircleSegement"/>'s underlaying <see cref="GreatCircle"/> in the given point, that points in the specified direction.
+        /// </summary>
+        /// <param name="point">The point on the underlaying <see cref="GreatCircle"/> that the tangent is wanted for.</param>
+        /// <param name="direction">The vector specifying in which direction the tangent vector will point.</param>
+        /// <returns>The tangent vector pointing in the right direction.</returns>
+        public CartesianVector GetTangentAt(SphereCoordinate point, CartesianVector direction)
+        {
+            return BaseCircle.GetTangentAt(point, direction);
+        }
+
+        /// <summary>
         /// Checks whether the given <see cref="GreatCircleSegment"/> intersects with this one.
         /// The point of intersection can then be found in the out-Parameter.
         /// </summary>
