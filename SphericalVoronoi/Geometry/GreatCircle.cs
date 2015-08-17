@@ -114,6 +114,16 @@ namespace SphericalVoronoi.Geometry
             return true;
         }
 
+        /// <summary>
+        /// Checks whether a given <see cref="SphereCoordinate"/> is on this great circle.
+        /// </summary>
+        /// <param name="sphereCoordinate">The <see cref="SphereCoordinate"/> to test.</param>
+        /// <returns>Whether the coordinate is on this great circle.</returns>
+        public bool IsOnCircle(SphereCoordinate sphereCoordinate)
+        {
+            return DefinitionVector.DotProduct(sphereCoordinate).IsAlmostEqualTo(0);
+        }
+
         public override string ToString()
         {
             return "Great Circle: " + DefinitionVector.ToString();

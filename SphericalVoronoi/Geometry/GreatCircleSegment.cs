@@ -58,6 +58,21 @@ namespace SphericalVoronoi.Geometry
         }
 
         /// <summary>
+        /// Creates a new instance of the <see cref="GreatCircleSegment"/> struct with the given points defining it.
+        /// </summary>
+        /// <param name="baseCircle">The <see cref="GreatCircle"/> that this segment is part of.</param>
+        /// <param name="start">The start coordinate of the segment.</param>
+        /// <param name="end">The end coordinate of the segment.</param>
+        public GreatCircleSegment(GreatCircle baseCircle, SphereCoordinate start, SphereCoordinate end)
+            : this(start, end)
+        {
+            if (!baseCircle.IsOnCircle(start) || !baseCircle.IsOnCircle(end))
+                throw new ArgumentOutOfRangeException("Start and End have to be on the baseCircle.");
+
+            BaseCircle = baseCircle;
+        }
+
+        /// <summary>
         /// Calculates the length of a Great Circle segment between the two <see cref="SphereCoordinate"/>s.
         /// Coordinates must have the same radius.
         /// </summary>

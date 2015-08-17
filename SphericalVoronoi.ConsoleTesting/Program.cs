@@ -42,6 +42,20 @@ namespace SphericalVoronoi.ConsoleTesting
             Console.WriteLine("Area of whole sphere: " + 4 * Math.PI);
             Console.WriteLine("Area of quarter sphere: " + Math.PI);
 
+            Console.WriteLine();
+            Console.WriteLine(Math.Acos(new CartesianVector(0, 1, 0).DotProduct(new SphereCoordinate(Math.PI / 2, 0))));
+            Console.WriteLine(Math.Acos(new CartesianVector(0, 1, 0).DotProduct(new SphereCoordinate(Math.PI / 2, -Math.PI / 2))));
+            Console.WriteLine(Math.Acos(new CartesianVector(0, 1, 0).DotProduct(new SphereCoordinate(Math.PI / 2, 0))));
+            Console.WriteLine(Math.Acos(new CartesianVector(0, 1, 0).DotProduct(new SphereCoordinate(Math.PI / 2, -Math.PI / 2))));
+
+            Console.WriteLine();
+            Console.WriteLine(Math.Acos(new CartesianVector(1, 1, 0).AsUnitVector.DotProduct(new SphereCoordinate(Math.PI / 2, 0))));
+            Console.WriteLine(Math.Acos(new CartesianVector(1, 1, 0).AsUnitVector.DotProduct(new SphereCoordinate(Math.PI / 4, -Math.PI / 2))));
+
+            Console.WriteLine();
+            Console.WriteLine(Math.Acos(new CartesianVector(0, 1, 0).DotProduct(new CartesianVector(1, 1, 0).AsUnitVector)));
+            Console.WriteLine(Math.PI / 4);
+
             Console.ReadLine();
         }
     }
