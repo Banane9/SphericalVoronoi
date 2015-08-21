@@ -29,9 +29,9 @@ namespace SphericalVoronoi
 
             public SphereCoordinate Point { get; private set; }
 
-            public SpherePolygon Polygon { get; set; }
+            public VoronoiCell Polygon { get; set; }
 
-            public VoronoiPoint(SphereCoordinate point, bool calculated = false, SpherePolygon polygon = null)
+            public VoronoiPoint(SphereCoordinate point, bool calculated = false, VoronoiCell polygon = null)
             {
                 Point = point;
                 Calculated = calculated;

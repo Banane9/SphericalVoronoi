@@ -115,12 +115,43 @@ namespace SphericalVoronoi.Geometry
         }
 
         /// <summary>
+        /// Checks whether the given <see cref="GreatCircleSegment"/> intersects with this <see cref="GreatCicle"/>.
+        /// The point of intersection can then be found in the out-Parameter.
+        /// </summary>
+        /// <param name="arc">The arc segment to be checked.</param>
+        /// <param name="intersection">The point of intersection, if they intersect.</param>
+        /// <returns>Whether the <see cref="GreatCircleSegment"/> intersects this <see cref="GreatCircle"/> or not.</returns>
+        public bool Intersects(GreatCircleSegment arc, out SphereCoordinate intersection)
+        {
+            intersection = default(SphereCoordinate);
+
+            CartesianVector possibleIntersection;
+            if (!Intersects(arc.BaseCircle, out possibleIntersection))
+                return false;
+
+            if (arc.IsOnArc(possibleIntersection))
+            {
+                intersection = possibleIntersection;
+                return true;
+            }
+
+            if (arc.IsOnArc(-possibleIntersection))
+            {
+                intersection = -possibleIntersection;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Checks whether a given <see cref="SphereCoordinate"/> is on this great circle.
         /// </summary>
         /// <param name="sphereCoordinate">The <see cref="SphereCoordinate"/> to test.</param>
         /// <returns>Whether the coordinate is on this great circle.</returns>
         public bool IsOnCircle(SphereCoordinate sphereCoordinate)
         {
+            // DotProduct of (unit) vectors is 0 when they're in a 90° angle.
             return DefinitionVector.DotProduct(sphereCoordinate).IsAlmostEqualTo(0);
         }
 

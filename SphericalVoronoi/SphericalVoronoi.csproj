@@ -47,11 +47,11 @@
     <Compile Include="Geometry\GreatCircle.cs" />
     <Compile Include="Geometry\GreatCircleSegment.cs" />
     <Compile Include="Geometry\CartesianVector.cs" />
-    <Compile Include="Geometry\SpherePolygon.cs" />
     <Compile Include="Geometry\SphereCoordinate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SphericalVoronoi.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="VoronoiCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
